@@ -10,6 +10,7 @@ antigen theme xiong-chiamiov-plus
 antigen bundle ssh-agent
 
 # Bundles from the default repo (robbyrussell's oh-my-zsh)
+antigen bundle dotenv
 antigen bundle git
 antigen bundle pip
 antigen bundle lein
