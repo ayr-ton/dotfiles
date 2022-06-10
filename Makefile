@@ -85,6 +85,7 @@ install: locale upgrade operator neovim sudo aur zsh ssh install-base
 
 
 .PHONY: stow
-stow: 
+stow:
+	@chown -R operator:wheel .
 	@sudo -u operator stow */
 
