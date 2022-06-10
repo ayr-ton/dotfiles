@@ -57,8 +57,9 @@ aur: is-archlinux
 
 .PHONY: zsh
 zsh: is-archlinux
-	@sudo -u operator yay --noconfirm --needed -Sy manjaro-zsh-config-git
-	@chsh -s /bin/zsh operator
+	@cd /tmp && \
+	sudo -u operator yay --noconfirm --needed -Sy manjaro-zsh-config-git && \
+	chsh -s /bin/zsh operator
 
 
 .PHONY: ssh
