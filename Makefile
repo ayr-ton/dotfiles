@@ -27,8 +27,8 @@ operator:
 	@if id "operator" &>/dev/null; then \
     	echo "operator is already here"; \
 	else \
-		useradd -m -g wheel operator; \
-		echo "Which password do you want for operator user?"; \
+		useradd -m -g wheel operator && \
+		echo "Which password do you want for operator user?" && \
 		passwd operator; \
 	fi
 
@@ -37,7 +37,7 @@ operator:
 neovim: is-archlinux
 	@pacman --noconfirm --needed -S neovim
 	@if pacman -Qo vi &>/dev/null; then \
-		pacman --noconfirm -R vi ; \
+		pacman --noconfirm -R vi && \
 		ln -sf /usr/sbin/nvim /usr/sbin/vi; \
 	fi
 
@@ -49,10 +49,14 @@ visudo:
 
 .PHONY: aur
 aur: is-archlinux
-	@cd /tmp && \
-	sudo -u operator git clone https://aur.archlinux.org/yay.git && \
-	cd yay && \
-	sudo -u operator makepkg -si --noconfirm
+	@if pacman -Qo yay &>/dev/null; then \
+		echo "yay is already installed"; \
+	else \
+		cd /tmp && \
+		sudo -u operator git clone https://aur.archlinux.org/yay.git && \
+		cd yay && \
+		sudo -u operator makepkg -si --noconfirm; \
+	fi
 
 
 .PHONY: zsh
