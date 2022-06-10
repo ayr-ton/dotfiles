@@ -77,7 +77,7 @@ ssh: is-archlinux
 
 .PHONY: install-base
 install-base: is-archlinux
-	@pacman --noconfirm --needed -S - < packages/base.list
+	@pacman --noconfirm --needed -S - < packages.list
 
 
 .PHONY: stow
