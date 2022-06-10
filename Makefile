@@ -36,8 +36,10 @@ operator:
 .PHONY: neovim
 neovim: is-archlinux
 	@pacman --noconfirm --needed -S neovim
-	@pacman --noconfirm -R vi
-	@ln -sf /usr/sbin/nvim /usr/sbin/vi
+	@if pacman -Qo vi &>/dev/null; then \
+		pacman --noconfirm -R vi ; \
+		ln -sf /usr/sbin/nvim /usr/sbin/vi; \
+	fi
 
 
 .PHONY: sudo
