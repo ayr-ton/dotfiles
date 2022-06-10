@@ -24,7 +24,7 @@ upgrade: update
 
 .PHONY: operator
 operator:
-	if id "operator" &>/dev/null; then \
+	@if id "operator" &>/dev/null; then \
     	echo "operator is already here"; \
 	else \
 		useradd -m -g wheel operator; \
