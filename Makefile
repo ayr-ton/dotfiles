@@ -82,8 +82,10 @@ install-base: is-archlinux
 
 .PHONY: stow
 stow:
-	@chown -R operator:wheel .
-	@sudo -u operator stow */
+	@sudo -u operator cd /home/operator && \
+	sudo -u operator git clone https://github.com/ayr-ton/dotfiles.git && \
+	sudo -u operator cd dotfiles && \
+	sudo -u operator stow */
 
 
 .PHONY: install
