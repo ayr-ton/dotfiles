@@ -24,9 +24,13 @@ upgrade: update
 
 .PHONY: operator
 operator:
-	@useradd -m -g wheel operator
-	@echo "Which password do you want for operator user?"
-	@passwd operator
+	@if [id "operator" &>/dev/null]; then \
+    	echo "operator is already here"; \
+	else \
+		useradd -m -g wheel operator; \
+		echo "Which password do you want for operator user?"; \
+		passwd operator; \
+	fi
 
 
 .PHONY: neovim
