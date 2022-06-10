@@ -72,7 +72,7 @@ ssh: is-archlinux
 	@systemctl enable --now sshd.service
 	@echo "You don't need to define a password for your new SSH key, but you can."
 	@sleep 5s
-	@sudo -u operator ssh-keygen -o -a 100 -t ed25519 -f ~/.ssh/id_ed25519 -C "operator@devshell"
+	@sudo -u operator ssh-keygen -o -a 100 -t ed25519 -f /home/operator/.ssh/id_ed25519 -C "operator@devshell"
 
 
 .PHONY: install-base
