@@ -80,12 +80,12 @@ install-base: is-archlinux
 	@pacman --noconfirm --needed -S - < packages/base.list
 
 
-.PHONY: install
-install: locale upgrade operator neovim sudo aur zsh ssh install-base
-
-
 .PHONY: stow
 stow:
 	@chown -R operator:wheel .
 	@sudo -u operator stow */
+
+
+.PHONY: install
+install: locale upgrade operator neovim sudo aur zsh ssh install-base stow
 
