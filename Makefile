@@ -49,8 +49,9 @@ visudo:
 
 .PHONY: aur
 aur: is-archlinux
-	@sudo -u operator git clone https://aur.archlinux.org/yay.git /tmp/yay && \
-	sudo -u operator cd /tmp/yay && \
+	@cd /tmp && \
+	sudo -u operator git clone https://aur.archlinux.org/yay.git && \
+	cd yay && \
 	sudo -u operator makepkg -si --noconfirm
 
 
