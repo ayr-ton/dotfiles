@@ -16,6 +16,12 @@ update: is-archlinux
 	@pacman -Sy
 
 
+.PHONY: locale
+locale:
+	@sed -i '/#en_US.UTF-8/s/^#//' /etc/locale.gen 
+	@locale-gen
+
+
 .PHONY: upgrade
 upgrade: update
 	@pacman -Su --noconfirm
@@ -35,21 +41,9 @@ neovim: is-archlinux
 	@ln -sf /usr/sbin/nvim /usr/sbin/vi
 
 
-.PHONY: visudo
+.PHONY: sudo
 visudo:
-	@echo "# Uncomment one of the following"
-	@echo "%wheel ALL=(ALL:ALL) ALL # For sudo with operator password"
-	@echo "%wheel ALL=(ALL:ALL) NOPASSWD: ALL # For sudo without operator password"
-	@sleep 3s
-	@echo "# Choose just one and exit"
-	@sleep 5s
-	@echo "type i for edit"
-	@sleep 2s
-	@echo "type ESC for leave edit more"
-	@sleep 2s
-	@echo "type :x ENTER to save"
-	@sleep 3s
-	@visudo
+	@sed -i '/# %wheel ALL=(ALL:ALL) NOPASSWD: ALL/s/^# //' /etc/sudoers
 
 
 .PHONY: aur
@@ -79,7 +73,7 @@ install-base: is-archlinux
 
 
 .PHONY: install
-install: upgrade operator neovim visudo aur zsh ssh install-base
+install: locale upgrade operator neovim sudo aur zsh ssh install-base
 
 
 .PHONY: stow
