@@ -6,11 +6,6 @@ is-archlinux:
 	@type pacman
 
 
-.PHONY: clean
-clean:
-	@rm -rf yay
-
-
 .PHONY: update
 update: is-archlinux
 	@pacman -Sy
@@ -47,9 +42,9 @@ visudo:
 
 
 .PHONY: aur
-aur: clean is-archlinux
-	@sudo -u operator git clone https://aur.archlinux.org/yay.git
-	@cd yay && sudo -u operator makepkg -si --noconfirm
+aur: is-archlinux
+	@sudo -u operator git clone https://aur.archlinux.org/yay.git /tmp/yay
+	@cd /tmp/yay && sudo -u operator makepkg -si --noconfirm
 
 
 .PHONY: zsh
@@ -77,6 +72,6 @@ install: locale upgrade operator neovim sudo aur zsh ssh install-base
 
 
 .PHONY: stow
-stow: clean
+stow: 
 	@sudo -u operator stow */
 
